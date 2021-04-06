@@ -23,9 +23,9 @@ import java.util.stream.Collectors;
 public class TokenProvider implements Serializable {
 
 
-    public static final  long JWT_TOKEN_VALIDITY = 12 * 60 * 60;
+    public static final long JWT_TOKEN_VALIDITY = 12 * 60 * 60;
 
-    @Value("${token.secret}" )
+    @Value("${token.secret}")
     private String secretKey;
 
 
@@ -61,13 +61,13 @@ public class TokenProvider implements Serializable {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
 
-        log.info("authorities",authorities);
+        log.info("authorities", authorities);
         return Jwts.builder()
                 .setSubject(authentication.getName())
                 .claim(AUTHORITIES_KEY, authorities)
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY*1000))
+                .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
                 .compact();
     }
 
@@ -88,7 +88,6 @@ public class TokenProvider implements Serializable {
         final Jws<Claims> claimsJws = jwtParser.parseClaimsJws(token);
 
         final Claims claims = claimsJws.getBody();
-
 
 
         log.info("claims" + claims.get(AUTHORITIES_KEY).toString());

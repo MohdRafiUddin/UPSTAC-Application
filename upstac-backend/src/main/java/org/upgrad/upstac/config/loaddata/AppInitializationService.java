@@ -38,12 +38,11 @@ public class AppInitializationService implements ApplicationListener<Application
     private static final Logger log = LoggerFactory.getLogger(AppInitializationService.class);
 
 
-
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
 
 
-        if ( roleService.shouldInitialize()) {
+        if (roleService.shouldInitialize()) {
             log.info("loading default values");
             initialize();
 
@@ -52,7 +51,6 @@ public class AppInitializationService implements ApplicationListener<Application
 
 
     }
-
 
 
     public void initialize() {
@@ -83,7 +81,8 @@ public class AppInitializationService implements ApplicationListener<Application
     public User createUserFrom(String name, Integer pincode) {
         return userService.addUser(createRegisterRequestWith(name, pincode));
     }
-    public  static RegisterRequest createRegisterRequestWith(String user, int pincode) {
+
+    public static RegisterRequest createRegisterRequestWith(String user, int pincode) {
         RegisterRequest registerRequest = new RegisterRequest();
         String userNameinLowerCase = user.replace(" ", "").toLowerCase().replaceAll("[^a-z0-9]", "");
         ;
@@ -99,6 +98,7 @@ public class AppInitializationService implements ApplicationListener<Application
         registerRequest.setEmail(userNameinLowerCase + "@upgrad.com");
         return registerRequest;
     }
+
     private static String getAPhoneNumber() {
         String phone = getRandomPhoneNumber();
         while (generatedPhones.contains(phone) == true) {
@@ -129,6 +129,7 @@ public class AppInitializationService implements ApplicationListener<Application
         else
             return gender;
     }
+
     static String getRandomDoorNumber() {
 
         int min = 1;
@@ -176,6 +177,7 @@ public class AppInitializationService implements ApplicationListener<Application
             return getRandomDoorNumber() + " - " + getRandomStreetName() + ",Goa";
 
     }
+
     static int getRandomPinCode() {
 
 

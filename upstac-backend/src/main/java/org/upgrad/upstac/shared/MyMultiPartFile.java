@@ -1,7 +1,6 @@
 package org.upgrad.upstac.shared;
 
 import org.springframework.lang.Nullable;
-import org.springframework.util.Assert;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,7 +15,6 @@ public class MyMultiPartFile implements MultipartFile {
     @Nullable
     private String contentType;
     private final byte[] content;
-
 
 
     public MyMultiPartFile(String name, InputStream contentStream) throws IOException {
@@ -49,7 +47,7 @@ public class MyMultiPartFile implements MultipartFile {
     }
 
     public long getSize() {
-        return (long)this.content.length;
+        return (long) this.content.length;
     }
 
     public byte[] getBytes() throws IOException {
